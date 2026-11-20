@@ -2,7 +2,7 @@ const BodyTag=document.getElementsByClassName("container")[0];
 const TitleDiv=document.createElement("div");
 TitleDiv.classList.add("Title")
 TitleDiv.append("Welcoome");
-BodyTag.prepend(TitleDiv);
+BodyTag.append(TitleDiv);
 
 let productID=1;
 
@@ -14,7 +14,7 @@ const handlChange =(event) =>{
  const productContainer=document.createElement("div");
  productContainer.classList.add("productcontainer")
  const parentDiv=document.createElement("div");
- parentDiv.classList.add("productname")
+ productContainer.classList.add("productname")
 
  parentDiv.addEventListener("click", () =>{
     const classexit= parentDiv.classList.contains("purched");
@@ -32,6 +32,11 @@ const handlChange =(event) =>{
  const spanTag=document.createElement("span");
  const trashIcon=document.createElement("i");
  trashIcon.classList.add("fa-regular" ,"fa-trash-can")
+ trashIcon.addEventListener("click",() =>{
+    productContainer.remove();
+    
+    
+ })
  spanTag.id=productID;
  const productid= productID.toString() +". "+ inputValue;
 spanTag.append(productid);

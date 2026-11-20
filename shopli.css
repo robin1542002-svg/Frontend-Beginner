@@ -17,16 +17,17 @@ body{
 
 .ordercontainer{
     margin-top: 20px;
+    margin: 30px;
 
 }
 .productname{
     background-color: white;
-    
+    padding: 10px;
     border-radius: 5px;
     margin-top: 5px;
     cursor: pointer;
     user-select: none;
-    display: inline;
+    display: flex;
 
 }
 
@@ -44,4 +45,8 @@ body{
 }
 .purched{
     text-decoration: line-through;
+}.fa-trash-can{
+    color: rgb(2, 2, 2);
+    margin-left: 20px;
+    padding: 5px;
 }

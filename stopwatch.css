@@ -1,0 +1,20 @@
+body{
+    background-color: rgb(15, 12, 12);
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+.stopwatch{
+    font-size: 150px;
+    color: yellow;
+    font-weight: bold;
+}
+button{
+    margin-left: 10px;
+    background-color: rgb(24, 219, 154);
+    
+}
+
