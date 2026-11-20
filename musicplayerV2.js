@@ -4,6 +4,12 @@ const currentandDurationTimeTag= document.getElementsByClassName("curretnAndtota
 const currentProgressTag= document.getElementById("currentProgress");
 const playButtonTag = document.getElementsByClassName("playBtn")[0]
 const pauseButtonTag = document.getElementsByClassName("pauseBtn")[0]
+const previousButtonTag = document. getElementsByClassName("previousBtn")[0];
+const nextButtonTag = document. getElementsByClassName("nextBtn")[0];
+
+
+
+
 
 const tracks = [
         {trackId :"music/Buuny Phyo.mp3",title : "Anniversary(Bunny Phyo)"} ,       
@@ -15,9 +21,13 @@ const tracks = [
 for (let i = 0 ; i < tracks.length ;i++){
     const trackTag= document.createElement("div");
     trackTag.addEventListener("click",() =>{
-        const trackId=tracks[i].trackId;
-        audioTag.src = trackId;
-        audioTag.play();
+        // const trackId=tracks[i].trackId;
+        // audioTag.src = trackId;
+        // audioTag.play();
+        // isPlaying = true ;
+        // updatePlayandPause();
+        currentplayingindex = i;
+        playSong();
     });
     trackTag.classList.add("trackItem")
     const title=(i+1).toString() + ". " + tracks[i].title;
@@ -54,6 +64,7 @@ audioTag.addEventListener("timeupdate",()=>{
     
 
 })
+
 const updateCurrentProgress = (currentTime) => {
     const updateCurrentProgressWidth = (500/duration) * currentTime;
     currentProgressTag.style.width = updateCurrentProgressWidth.toString()+ "px";
@@ -72,10 +83,24 @@ const createMINandSECtext = (totalSeonds) =>{
 let currentplayingindex=0;
 isPlaying = false;
 playButtonTag.addEventListener("click",()=>{
-    const songIdToPlay= tracks[currentplayingindex].trackId;
-    audioTag.src=songIdToPlay;
-    audioTag.play();
     isPlaying=true;
+    const currentTime = Math.floor(audioTag.currentTime);
+    if (currentTime === 0){
+        // const songIdToPlay= tracks[currentplayingindex].trackId;
+        // audioTag.src=songIdToPlay;
+        // audioTag.play();
+        // updatePlayandPause()
+        playSong();
+    }
+    else{
+        audioTag.play();
+        updatePlayandPause();
+    }
+    
+})
+pauseButtonTag.addEventListener("click", () =>{
+    isPlaying = false;
+    audioTag.pause();
     updatePlayandPause()
 })
 
@@ -84,4 +109,45 @@ const updatePlayandPause =() =>{
         playButtonTag.style.display="none";
         pauseButtonTag.style.display="inline";
     }
+    else{
+        playButtonTag.style.display="inline";
+        pauseButtonTag.style.display="none";
+    }
 }
+
+previousButtonTag.addEventListener("click", () =>{
+    if (currentplayingindex === 0){
+        return;
+    }
+    else{
+        currentplayingindex -= 1;
+        // const songIDtoPLay= tracks[currentplayingindex].trackId;
+        // audioTag.src= songIDtoPLay;
+        // audioTag.play();
+        // isPlaying = true;
+        // updatePlayandPause();
+        playSong();
+    }
+})
+ nextButtonTag.addEventListener("click", () => {
+    if (currentplayingindex === tracks.length -1){
+        return;
+    }
+    else{
+        currentplayingindex += 1;
+        // const songIDtoPLay= tracks[currentplayingindex].trackId;
+        // audioTag.src= songIDtoPLay;
+        // audioTag.play();
+        // isPlaying = true;
+        // updatePlayandPause();
+        playSong();
+    }
+ })
+ 
+ const playSong = () => {
+     const songIDtoPLay= tracks[currentplayingindex].trackId;
+        audioTag.src= songIDtoPLay;
+        audioTag.play();
+        isPlaying = true;
+        updatePlayandPause();
+ }
