@@ -240,3 +240,105 @@ const products = [
     }
   }
 ]
+
+const autoCompleteInputTag = document.getElementsByClassName("autocompleteInput")[0];
+const resultContainerTag = document.getElementsByClassName("resultContainer")[0];
+
+
+ let filteredProduct = [];
+autoCompleteInputTag.addEventListener("keyup", (event) =>{
+  if (event.key === "ArrowDown" || event.key === "ArrowUp" || event.key === "Enter"){
+    navigateAndSelectProduct(event.key);
+    return;
+  }
+
+
+
+  resultContainerTag.innerHTML = "";
+  const searchText = event.target.value.toLowerCase();
+  if (searchText.length===0){
+    return;
+  } 
+  
+
+  filteredProduct = products.filter ((product) => {
+    return product.title.toLowerCase().includes(searchText);
+  });
+  const hasProductToShow = filteredProduct.length > 0;
+  if (hasProductToShow){
+    
+    for (let i = 0; i < filteredProduct.length; i++) {
+      const productItemContainer = document.createElement("div");
+      productItemContainer.id = filteredProduct[i].id;
+      productItemContainer.classList.add("productItemContainer");
+
+      const productName = document.createElement("div");
+      productName.classList.add("productName");
+      productName.append(filteredProduct[i].title);
+
+      const productImage = document.createElement("img");
+      productImage.classList.add("productImage");
+      productImage.src = filteredProduct[i].image;
+      
+      productItemContainer.append(productName,productImage);
+      resultContainerTag.append(productItemContainer);
+
+    }
+
+  }
+  
+})
+
+let indexToSelect = -1;
+const navigateAndSelectProduct = (key) => {
+  if (key === "ArrowDown"){
+    
+    if (indexToSelect === filteredProduct.length -1 ){
+      indexToSelect =-1;
+      DeselectProduct();
+      return;
+      
+    }
+    indexToSelect += 1;
+     const productItemContainerToSelect = SelectProduct(indexToSelect);
+    if (indexToSelect >0){
+      DeselectProduct()
+    }
+    productItemContainerToSelect.classList.add("selected")
+    
+  }
+  else if (key === "ArrowUp"){
+    if (indexToSelect === -1 ){
+      return;
+    }
+    if (indexToSelect === 0){
+      DeselectProduct();
+      indexToSelect = -1;
+      return;
+    }
+    indexToSelect -= 1;
+    DeselectProduct();
+    const productItemContainerToSelect = SelectProduct(indexToSelect);
+    productItemContainerToSelect.classList.add("selected")
+  }
+  else{
+    const enterProduct = SelectProduct(indexToSelect);
+    console.log("Product is " ,enterProduct);
+    
+  }
+}
+
+const DeselectProduct = () =>{
+  const productIdToDeselect = document.getElementsByClassName("selected")[0];
+      productIdToDeselect.style.backgroundColor="white";
+      productIdToDeselect.firstChild.style.color="black";
+      productIdToDeselect.classList.remove("selected");
+}
+
+const SelectProduct = (index) =>{
+  const productIdtoSelect = filteredProduct[index].id.toString();
+    const productItemContainerToSelect= document.getElementById(productIdtoSelect)
+    productItemContainerToSelect.style.backgroundColor ="blue";
+    productItemContainerToSelect.firstChild.style.color ="white";
+    return productItemContainerToSelect;
+}

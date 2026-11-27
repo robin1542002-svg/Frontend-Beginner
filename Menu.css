@@ -1,0 +1,80 @@
+body{
+    background-color: gray;
+}
+.container{
+    max-width: 1000px;
+    margin-top: 100px;
+    background-color: black;
+    position: relative;
+}
+.hamburgerMenuContainer{
+    position: absolute;
+    right: 0px;
+    cursor: pointer;
+    z-index: 1;
+}
+.humberger{
+    width: 30px;
+    height: 4px;
+    background-color: aliceblue;
+    margin: 5px 0px;
+    border-radius:5px;
+    cursor: pointer;
+    
+    
+}
+.line1{
+    transform-origin:left ;
+    transition: transform 1s ease-in-out;
+
+}
+.crossline1{
+    transform: rotate(40deg) translateX(1px);
+    
+}
+.line3{
+    transform-origin:left ;
+    transition: transform 1s ease-in-out;
+
+}
+.crossline3{
+    transform: rotate(-38deg) translateY(1px);
+    
+}
+.line2
+{
+    transition: all 1.7s ease;
+}
+.hideline2{
+    opacity: 0;
+}
+.overlayMenu{
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(167, 177, 228);
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    opacity: 0;
+    transition:all 0.5s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    user-select: none;
+}
+.showOverlayMenu{
+    opacity: 1;
+    
+}
+li{
+    list-style: none;
+    padding: 15px;
+    font-size: 25px;
+    font-weight: bold;
+    color: rgb(59, 67, 74);
+}
+li:hover{
+    color: wheat;
+}

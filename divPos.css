@@ -1,0 +1,38 @@
+body {
+    background-color: rgb(241, 237, 237);
+   
+}
+.container{
+    max-width: 1000px;
+    margin-top: 100px;
+}
+.lvl1{
+    width: 500px;
+    height: 250px;
+    position: fixed;
+    
+}
+.lvl2{
+    
+    width: 600px;
+    
+    position: relative;
+    padding: 20px;
+    background-color: aqua;
+}
+.lvl3{
+    
+    width: 500px;
+    display: flex;
+    justify-content: space-between;
+    background-color: blue;
+    padding: 20px;
+
+}
+
+
+.item{
+   background-color: rgb(199, 225, 51);
+   padding: 10px;
+
+}
